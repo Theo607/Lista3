@@ -24,7 +24,7 @@ public class FiguryZadanie {
 
     class quadrangle implements shape {
         int a, b, c, d;
-        double angle; // Angle in degrees
+        double angle;
 
         quadrangle(int a, int b, int c, int d, double angle) {
             this.a = a;
@@ -35,8 +35,7 @@ public class FiguryZadanie {
         }
 
         public double area() {
-            // Using Bretschneider's formula for area of a quadrilateral
-            double s = (a + b + c + d) / 2.0; // Semi-perimeter
+            double s = (a + b + c + d) / 2.0;
             double angleRad = Math.toRadians(angle);
             return Math.sqrt((s - a) * (s - b) * (s - c) * (s - d) - a * c * b * d * Math.pow(Math.cos(angleRad / 2), 2));
         }
@@ -53,7 +52,7 @@ public class FiguryZadanie {
 
         @Override
         public double area() {
-            return a * b; // Area of a rectangle is length * width
+            return a * b;
         }
     }
 
@@ -64,7 +63,7 @@ public class FiguryZadanie {
 
         @Override
         public double area() {
-            return a * a; // Area of a square is side * side
+            return a * a;
         }
     }
 
@@ -82,7 +81,6 @@ public class FiguryZadanie {
         }
 
         public double area() {
-            // Area of a regular pentagon
             return (5 * side * side) / (4 * Math.tan(Math.PI / 5));
         }
 
@@ -99,7 +97,6 @@ public class FiguryZadanie {
         }
 
         public double area() {
-            // Area of a regular hexagon
             return (3 * Math.sqrt(3) * side * side) / 2;
         }
 
@@ -125,7 +122,7 @@ public class FiguryZadanie {
 
             try {
                 switch (shapeType) {
-                    case "o": // Circle
+                    case "o":
                         if (parts.length != 2) {
                             throw new IllegalArgumentException("Invalid input for circle. Expected format: o <radius>");
                         }
@@ -134,17 +131,17 @@ public class FiguryZadanie {
                         System.out.printf("Circle: Area = %.2f, Perimeter = %.2f%n", c.area(), c.perimeter());
                         break;
 
-                    case "c": // Quadrangle
-                        if (parts.length == 3) { // Square
+                    case "c":
+                        if (parts.length == 3) {
                             int side = Integer.parseInt(parts[1]);
                             square s = f.new square(side);
                             System.out.printf("Square: Area = %.2f, Perimeter = %.2f%n", s.area(), s.perimeter());
-                        } else if (parts.length == 4 && parts[3].equals("90")) { // Rectangle
+                        } else if (parts.length == 4 && parts[3].equals("90")) {
                             int a = Integer.parseInt(parts[1]);
                             int b = Integer.parseInt(parts[2]);
                             rectangle r = f.new rectangle(a, b);
                             System.out.printf("Rectangle: Area = %.2f, Perimeter = %.2f%n", r.area(), r.perimeter());
-                        } else if (parts.length == 6) { // General quadrangle
+                        } else if (parts.length == 6) {
                             int a = Integer.parseInt(parts[1]);
                             int b = Integer.parseInt(parts[2]);
                             int cSide = Integer.parseInt(parts[3]);
@@ -157,7 +154,7 @@ public class FiguryZadanie {
                         }
                         break;
 
-                    case "p": // Pentagon
+                    case "p":
                         if (parts.length != 2) {
                             throw new IllegalArgumentException("Invalid input for pentagon. Expected format: p <side>");
                         }
@@ -166,7 +163,7 @@ public class FiguryZadanie {
                         System.out.printf("Pentagon: Area = %.2f, Perimeter = %.2f%n", p.area(), p.perimeter());
                         break;
 
-                    case "s": // Hexagon
+                    case "s":
                         if (parts.length != 2) {
                             throw new IllegalArgumentException("Invalid input for hexagon. Expected format: s <side>");
                         }
