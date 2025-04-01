@@ -50,11 +50,21 @@ public class FiguryZadanie {
         rectangle(int a, int b) {
             super(a, b, a, b, 90);
         }
+
+        @Override
+        public double area() {
+            return a * b; // Area of a rectangle is length * width
+        }
     }
 
     class square extends quadrangle {
         square(int a) {
             super(a, a, a, a, 90);
+        }
+
+        @Override
+        public double area() {
+            return a * a; // Area of a square is side * side
         }
     }
 
