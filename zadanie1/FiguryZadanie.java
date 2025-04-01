@@ -10,9 +10,9 @@ public class FiguryZadanie {
     }
 
     static class Circle extends Shape {
-        int radius;
+        double radius;
 
-        Circle(int r) {
+        Circle(double r) {
             radius = r;
         }
 
@@ -26,10 +26,10 @@ public class FiguryZadanie {
     }
 
     static class Quadrangle extends Shape {
-        int a, b, c, d;
+        double a, b, c, d;
         double angle;
 
-        Quadrangle(int a, int b, int c, int d, double angle) {
+        Quadrangle(double a, double b, double c, double d, double angle) {
             this.a = a;
             this.b = b;
             this.c = c;
@@ -49,7 +49,7 @@ public class FiguryZadanie {
     }
 
     static class Rectangle extends Quadrangle {
-        Rectangle(int a, int b) {
+        Rectangle(double a, double b) {
             super(a, b, a, b, 90);
         }
 
@@ -60,7 +60,7 @@ public class FiguryZadanie {
     }
 
     static class Square extends Quadrangle {
-        Square(int a) {
+        Square(double a) {
             super(a, a, a, a, 90);
         }
 
@@ -71,15 +71,15 @@ public class FiguryZadanie {
     }
 
     static class Rhombus extends Quadrangle {
-        Rhombus(int a, double angle) {
+        Rhombus(double a, double angle) {
             super(a, a, a, a, angle);
         }
     }
 
     static class Pentagon extends Shape {
-        int side;
+        double side;
 
-        Pentagon(int side) {
+        Pentagon(double side) {
             this.side = side;
         }
 
@@ -93,9 +93,9 @@ public class FiguryZadanie {
     }
 
     static class Hexagon extends Shape {
-        int side;
+        double side;
 
-        Hexagon(int side) {
+        Hexagon(double side) {
             this.side = side;
         }
 
@@ -128,35 +128,35 @@ public class FiguryZadanie {
                         if (parts.length != 2) {
                             throw new IllegalArgumentException("Invalid input for circle. Expected format: o <radius>");
                         }
-                        int radius = Integer.parseInt(parts[1]);
+                        double radius = Double.parseDouble(parts[1]);
                         Circle c = new Circle(radius);
-                        System.out.printf("Circle: Area = %.2f, Perimeter = %.2f%n", c.area(), c.perimeter());
+                        System.out.printf("Circle: Area: %.2f ; Perimeter: %.2f%n", c.area(), c.perimeter());
                         break;
 
                     case "c":
                         if (parts.length == 3) {
-                            int side = Integer.parseInt(parts[1]);
+                            double side = Double.parseDouble(parts[1]);
                             double angle = Double.parseDouble(parts[2]);
                             if (angle == 90) {
                                 Square s = new Square(side);
-                                System.out.printf("Square: Area = %.2f, Perimeter = %.2f%n", s.area(), s.perimeter());
+                                System.out.printf("Square: Area: %.2f ; Perimeter: %.2f%n", s.area(), s.perimeter());
                             } else {
                                 Rhombus r = new Rhombus(side, angle);
-                                System.out.printf("Rhombus: Area = %.2f, Perimeter = %.2f%n", r.area(), r.perimeter());
+                                System.out.printf("Rhombus: Area: %.2f ; Perimeter: %.2f%n", r.area(), r.perimeter());
                             }
                         } else if (parts.length == 4 && parts[3].equals("90")) {
-                            int a = Integer.parseInt(parts[1]);
-                            int b = Integer.parseInt(parts[2]);
+                            double a = Double.parseDouble(parts[1]);
+                            double b = Double.parseDouble(parts[2]);
                             Rectangle r = new Rectangle(a, b);
-                            System.out.printf("Rectangle: Area = %.2f, Perimeter = %.2f%n", r.area(), r.perimeter());
+                            System.out.printf("Rectangle: Area: %.2f ; Perimeter: %.2f%n", r.area(), r.perimeter());
                         } else if (parts.length == 6) {
-                            int a = Integer.parseInt(parts[1]);
-                            int b = Integer.parseInt(parts[2]);
-                            int cSide = Integer.parseInt(parts[3]);
-                            int d = Integer.parseInt(parts[4]);
+                            double a = Double.parseDouble(parts[1]);
+                            double b = Double.parseDouble(parts[2]);
+                            double cSide = Double.parseDouble(parts[3]);
+                            double d = Double.parseDouble(parts[4]);
                             double angle = Double.parseDouble(parts[5]);
                             Quadrangle q = new Quadrangle(a, b, cSide, d, angle);
-                            System.out.printf("Quadrangle: Area = %.2f, Perimeter = %.2f%n", q.area(), q.perimeter());
+                            System.out.printf("Quadrangle: Area: %.2f ; Perimeter: %.2f%n", q.area(), q.perimeter());
                         } else {
                             throw new IllegalArgumentException("Invalid input for quadrangle. Expected format: c <a> <b> <c> <d> <angle>, c <side> <angle> for square or rhombus, or c <a> <b> 90 for rectangle.");
                         }
@@ -166,25 +166,25 @@ public class FiguryZadanie {
                         if (parts.length != 2) {
                             throw new IllegalArgumentException("Invalid input for pentagon. Expected format: p <side>");
                         }
-                        int pentagonSide = Integer.parseInt(parts[1]);
+                        double pentagonSide = Double.parseDouble(parts[1]);
                         Pentagon p = new Pentagon(pentagonSide);
-                        System.out.printf("Pentagon: Area = %.2f, Perimeter = %.2f%n", p.area(), p.perimeter());
+                        System.out.printf("Pentagon: Area: %.2f ; Perimeter: %.2f%n", p.area(), p.perimeter());
                         break;
 
                     case "s":
                         if (parts.length != 2) {
                             throw new IllegalArgumentException("Invalid input for hexagon. Expected format: s <side>");
                         }
-                        int hexagonSide = Integer.parseInt(parts[1]);
+                        double hexagonSide = Double.parseDouble(parts[1]);
                         Hexagon h = new Hexagon(hexagonSide);
-                        System.out.printf("Hexagon: Area = %.2f, Perimeter = %.2f%n", h.area(), h.perimeter());
+                        System.out.printf("Hexagon: Area: %.2f ; Perimeter: %.2f%n", h.area(), h.perimeter());
                         break;
 
                     default:
                         System.out.println("Unknown shape type!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Invalid number format. Please enter valid integers or decimals.");
+                System.out.println("Invalid number format. Please enter valid numbers.");
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             } catch (Exception e) {
