@@ -134,8 +134,14 @@ public class FiguryZadanie {
                     case "c":
                         if (parts.length == 3) {
                             int side = Integer.parseInt(parts[1]);
-                            square s = f.new square(side);
-                            System.out.printf("Square: Area = %.2f, Perimeter = %.2f%n", s.area(), s.perimeter());
+                            double angle = Double.parseDouble(parts[2]);
+                            if (angle == 90) {
+                                square s = f.new square(side);
+                                System.out.printf("Square: Area = %.2f, Perimeter = %.2f%n", s.area(), s.perimeter());
+                            } else {
+                                rhombus r = f.new rhombus(side, angle);
+                                System.out.printf("Rhombus: Area = %.2f, Perimeter = %.2f%n", r.area(), r.perimeter());
+                            }
                         } else if (parts.length == 4 && parts[3].equals("90")) {
                             int a = Integer.parseInt(parts[1]);
                             int b = Integer.parseInt(parts[2]);
@@ -150,7 +156,7 @@ public class FiguryZadanie {
                             quadrangle q = f.new quadrangle(a, b, cSide, d, angle);
                             System.out.printf("Quadrangle: Area = %.2f, Perimeter = %.2f%n", q.area(), q.perimeter());
                         } else {
-                            throw new IllegalArgumentException("Invalid input for quadrangle. Expected format: c <a> <b> <c> <d> <angle>, c <side> <angle> for square, or c <a> <b> 90 for rectangle.");
+                            throw new IllegalArgumentException("Invalid input for quadrangle. Expected format: c <a> <b> <c> <d> <angle>, c <side> <angle> for square or rhombus, or c <a> <b> 90 for rectangle.");
                         }
                         break;
 
