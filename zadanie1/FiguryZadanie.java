@@ -227,10 +227,6 @@ public class FiguryZadanie {
             System.out.println(figures[j].Name() + " --- Surface:  " + figures[j].Surface() + " ___ Perimeter:  " + figures[j].Perimeter());
             j = j + 1;
         }
-        
-        //for (int j = 0; j < i; j++) {
-        //    System.out.println( " --- Surface:  " + figures[i].Surface() + " ___ Perimeter:  " + figures[i].Perimeter());
-        //}
     }
 }
 
