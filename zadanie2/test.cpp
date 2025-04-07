@@ -69,7 +69,7 @@ int main() {
         }
     }
 
-    for (const auto &fig : figures) {
+    for (const Figure* fig : figures) {
         std::cout << fig->Name() << " --- Surface: " << fig->Surface() << " ___ Perimeter: " << fig->Perimeter() << "\n";
         delete fig;
     }
