@@ -1,13 +1,16 @@
 import java.util.Scanner;
 
 public class FiguryZadanie {
+    
     interface FigureInterface {
         double Surface();
         double Perimeter();
         String Name();
     }
+
     abstract static class Figure implements FigureInterface {
     }
+
     static class Circle extends Figure {
         double radius;
         Circle(double r) {
