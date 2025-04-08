@@ -33,22 +33,15 @@ int main() {
                 if (inputString >> angle) {
                     if (angle == 90) {
                         figures.push_back(new Rectangle(a, b));
+                    }
+                }
+                else {
+                    if (b == 90) {
+                        figures.push_back(new Square(a));
                     } else {
                         figures.push_back(new Rhomboid(a, b));
                     }
-                } 
-                else {
-                    if (b == 90) {
-                        figures.push_back(new Rectangle(a, b));
-                    } else {
-                        figures.push_back(new Square(a));
-                    }
                 }
-            } 
-            else if (shapeType == "r") {
-                double a, b;
-                if (!(inputString >> a >> b)) throw std::invalid_argument("Invalid input for rectangle.");
-                figures.push_back(new Rectangle(a, b));
             } 
             else if (shapeType == "p") {
                 double a;
