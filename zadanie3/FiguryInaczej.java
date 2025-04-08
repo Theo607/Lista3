@@ -174,7 +174,6 @@ class Figure {
     }
 
     public static void main(String[] Args) {
-
         FirstClass[] figures = new FirstClass[100];
         SecondClass[] figures2 = new SecondClass[100];
         int i = 0;
@@ -266,7 +265,6 @@ class Figure {
     for (int j = 0; j < i; j++) {
         if (figures[j] instanceof FirstClass) {
             FirstClass figure = (FirstClass) figures[j];
-            System.out.println(j);
             System.out.println(figure.Name() + " --- Area: " + figure.Area() + " --- Perimeter: " + figure.Perimeter());
         } else if (figures2[j] instanceof SecondClass) {
             SecondClass figure = (SecondClass) figures2[j];
