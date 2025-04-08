@@ -173,9 +173,19 @@ class Figure {
        },
     }
 
+    public static class Results {
+        public double area;
+        public double perimeter;
+        public String name;
+        public Results(double area, double perimeter, String name) {
+            this.area = area;
+            this.perimeter = perimeter;
+            this.name = name;
+        }
+    }
+
     public static void main(String[] Args) {
-        FirstClass[] figures = new FirstClass[100];
-        SecondClass[] figures2 = new SecondClass[100];
+        Results[] figures = new Results[100];
         int i = 0;
 
         Scanner scanner = new Scanner(System.in);
@@ -198,9 +208,8 @@ class Figure {
                         throw new IllegalArgumentException("Invalid input for circle. Expected format: o <radius>");
                     }
                     double radius = Double.parseDouble(parts[1]);
-                    FirstClass circle = FirstClass.CIRCLE;
-                    circle.SetDimension(radius);
-                    figures[i] = circle;
+                    FirstClass.CIRCLE.SetDimension(radius);
+                    figures[i] = new Results(FirstClass.CIRCLE.Area(), FirstClass.CIRCLE.Perimeter(), FirstClass.CIRCLE.Name());
                     i++;
                     break;
 
@@ -209,19 +218,19 @@ class Figure {
                         double side = Double.parseDouble(parts[1]);
                         double angle = Double.parseDouble(parts[2]);
                         if (angle == 90) {
-                            figures[i] = FirstClass.SQUARE;
-                            ((FirstClass) figures[i]).SetDimension(side);
+                            FirstClass.SQUARE.SetDimension(side);
+                            figures[i] = new Results(FirstClass.SQUARE.Area(), FirstClass.SQUARE.Perimeter(), FirstClass.SQUARE.Name());
                             i++;
                         } else {
-                            figures2[i] = SecondClass.RHOMBUS;
-                            ((SecondClass) figures2[i]).SetDimension(side, angle);
+                            SecondClass.RHOMBUS.SetDimension(side, angle);
+                            figures[i] = new Results(SecondClass.RHOMBUS.Area(), SecondClass.RHOMBUS.Perimeter(), SecondClass.RHOMBUS.Name());
                             i++;
                         }
                     } else if (parts.length == 4 && parts[3].equals("90")) {
                         double length = Double.parseDouble(parts[1]);
                         double width = Double.parseDouble(parts[2]);
-                        figures2[i] = SecondClass.RECTANGLE;
-                        ((SecondClass) figures2[i]).SetDimension(length, width);
+                        SecondClass.RECTANGLE.SetDimension(length, width);
+                        figures[i] = new Results(SecondClass.RECTANGLE.Area(), SecondClass.RECTANGLE.Perimeter(), SecondClass.RECTANGLE.Name());
                         i++;
                     } else {
                         throw new IllegalArgumentException("Invalid input for quadrangle. Expected format: c <side> <angle> for square or rhombus, or c <length> <width> 90 for rectangle.");
@@ -233,8 +242,8 @@ class Figure {
                         throw new IllegalArgumentException("Invalid input for pentagon. Expected format: p <side>");
                     }
                     double pentagonSide = Double.parseDouble(parts[1]);
-                    figures[i] = FirstClass.PENTAGON;
-                    ((FirstClass) figures[i]).SetDimension(pentagonSide);
+                    FirstClass.PENTAGON.SetDimension(pentagonSide);
+                    figures[i] = new Results(FirstClass.PENTAGON.Area(), FirstClass.PENTAGON.Perimeter(), FirstClass.PENTAGON.Name());
                     i++;
                     break;
 
@@ -243,8 +252,8 @@ class Figure {
                         throw new IllegalArgumentException("Invalid input for hexagon. Expected format: s <side>");
                     }
                     double hexagonSide = Double.parseDouble(parts[1]);
-                    figures[i] = FirstClass.HEXAGON;
-                    ((FirstClass) figures[i]).SetDimension(hexagonSide);
+                    FirstClass.HEXAGON.SetDimension(hexagonSide);
+                    figures[i] = new Results(FirstClass.HEXAGON.Area(), FirstClass.HEXAGON.Perimeter(), FirstClass.HEXAGON.Name());
                     i++;
                     break;
 
@@ -261,15 +270,9 @@ class Figure {
     }
     scanner.close();
 
-    // Display results
-    for (int j = 0; j < i; j++) {
-        if (figures[j] instanceof FirstClass) {
-            FirstClass figure = (FirstClass) figures[j];
-            System.out.println(figure.Name() + " --- Area: " + figure.Area() + " --- Perimeter: " + figure.Perimeter());
-        } else if (figures2[j] instanceof SecondClass) {
-            SecondClass figure = (SecondClass) figures2[j];
-            System.out.println(figure.Name() + " --- Area: " + figure.Area() + " --- Perimeter: " + figure.Perimeter());
+        System.out.println("Results:");
+        for (int j = 0; j < i; j++) {
+            System.out.println("Figure: " + figures[j].name + ", Area: " + figures[j].area + ", Perimeter: " + figures[j].perimeter);
         }
-    }
     }
 }
