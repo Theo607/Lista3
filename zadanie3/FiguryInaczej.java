@@ -199,8 +199,9 @@ class Figure {
                         throw new IllegalArgumentException("Invalid input for circle. Expected format: o <radius>");
                     }
                     double radius = Double.parseDouble(parts[1]);
-                    figures[i] = FirstClass.CIRCLE;
-                    ((FirstClass) figures[i]).SetDimension(radius);
+                    FirstClass circle = FirstClass.CIRCLE;
+                    circle.SetDimension(radius);
+                    figures[i] = circle;
                     i++;
                     break;
 
