@@ -1,3 +1,4 @@
+import java.util.Scanner;
 class Figure {
     public interface FirstInterface {
         public static void SetDimension() {
@@ -173,20 +174,102 @@ class Figure {
     }
 
     public static void main(String[] Args) {
-        FirstClass.CIRCLE.SetDimension(5.0);
-        System.out.println(FirstClass.CIRCLE.Name() + " Area: " + FirstClass.CIRCLE.Area());
-        System.out.println(FirstClass.CIRCLE.Name() + " Perimeter: " + FirstClass.CIRCLE.Perimeter());
 
-        FirstClass.SQUARE.SetDimension(4);
-        System.out.println(FirstClass.SQUARE.Name() + " Area: " + FirstClass.SQUARE.Area());
-        System.out.println(FirstClass.SQUARE.Name() + " Perimeter: " + FirstClass.SQUARE.Perimeter());
+        FirstClass[] figures = new FirstClass[100];
+        SecondClass[] figures2 = new SecondClass[100];
+        int i = 0;
 
-        SecondClass.RECTANGLE.SetDimension(4.0, 5.0);
-        System.out.println(SecondClass.RECTANGLE.Name() + " Area: " + SecondClass.RECTANGLE.Area());
-        System.out.println(SecondClass.RECTANGLE.Name() + " Perimeter: " + SecondClass.RECTANGLE.Perimeter());
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter figure details. Type 'show' to see results.");
 
-        SecondClass.RHOMBUS.SetDimension(4, 5);
-        System.out.println(SecondClass.RHOMBUS.Name() + " Area: " + SecondClass.RHOMBUS.Area());
-        System.out.println(SecondClass.RHOMBUS.Name() + " Perimeter: " + SecondClass.RHOMBUS.Perimeter());
+    while (true) {
+        String input = scanner.nextLine();
+        if (input.equalsIgnoreCase("show")) {
+            System.out.println("Showing the answers.");
+            break;
+        }
+
+        String[] parts = input.split(" ");
+        String shapeType = parts[0];
+
+        try {
+            switch (shapeType) {
+                case "o": // Circle
+                    if (parts.length != 2) {
+                        throw new IllegalArgumentException("Invalid input for circle. Expected format: o <radius>");
+                    }
+                    double radius = Double.parseDouble(parts[1]);
+                    figures[i] = FirstClass.CIRCLE;
+                    ((FirstClass) figures[i]).SetDimension(radius);
+                    i++;
+                    break;
+
+                case "c": // Square, Rectangle, or Rhombus
+                    if (parts.length == 3) {
+                        double side = Double.parseDouble(parts[1]);
+                        double angle = Double.parseDouble(parts[2]);
+                        if (angle == 90) {
+                            figures[i] = FirstClass.SQUARE;
+                            ((FirstClass) figures[i]).SetDimension(side);
+                            i++;
+                        } else {
+                            figures2[i] = SecondClass.RHOMBUS;
+                            ((SecondClass) figures2[i]).SetDimension(side, angle);
+                            i++;
+                        }
+                    } else if (parts.length == 4 && parts[3].equals("90")) {
+                        double length = Double.parseDouble(parts[1]);
+                        double width = Double.parseDouble(parts[2]);
+                        figures2[i] = SecondClass.RECTANGLE;
+                        ((SecondClass) figures2[i]).SetDimension(length, width);
+                        i++;
+                    } else {
+                        throw new IllegalArgumentException("Invalid input for quadrangle. Expected format: c <side> <angle> for square or rhombus, or c <length> <width> 90 for rectangle.");
+                    }
+                    break;
+
+                case "p": // Pentagon
+                    if (parts.length != 2) {
+                        throw new IllegalArgumentException("Invalid input for pentagon. Expected format: p <side>");
+                    }
+                    double pentagonSide = Double.parseDouble(parts[1]);
+                    figures[i] = FirstClass.PENTAGON;
+                    ((FirstClass) figures[i]).SetDimension(pentagonSide);
+                    i++;
+                    break;
+
+                case "s": // Hexagon
+                    if (parts.length != 2) {
+                        throw new IllegalArgumentException("Invalid input for hexagon. Expected format: s <side>");
+                    }
+                    double hexagonSide = Double.parseDouble(parts[1]);
+                    figures[i] = FirstClass.HEXAGON;
+                    ((FirstClass) figures[i]).SetDimension(hexagonSide);
+                    i++;
+                    break;
+
+                default:
+                    System.out.println("Unknown shape type!");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number format. Please enter valid numbers.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        }
+    }
+    scanner.close();
+
+    // Display results
+    for (int j = 0; j < i; j++) {
+        if (figures[j] instanceof FirstClass) {
+            FirstClass figure = (FirstClass) figures[j];
+            System.out.println(figure.Name() + " --- Area: " + figure.Area() + " --- Perimeter: " + figure.Perimeter());
+        } else if (figures2[j] instanceof SecondClass) {
+            SecondClass figure = (SecondClass) figures2[j];
+            System.out.println(figure.Name() + " --- Area: " + figure.Area() + " --- Perimeter: " + figure.Perimeter());
+        }
+    }
     }
 }
